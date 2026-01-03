@@ -5,6 +5,28 @@ import { createPostSchema, postIdParamSchema, updatePostSchema } from "../valida
 
 const router = Router();
 
+/**
+ * @openapi
+ * /posts:
+ *   get:
+ *     summary: Get all posts
+ *     tags:
+ *       - Posts
+ *     responses:
+ *       200:
+ *         description: List of posts
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: number
+ *                   title:
+ *                     type: string
+ */
 router.get('/', getAllPostsHandler);
 router.get('/:id', validateParams(postIdParamSchema), getPostByIdHandler);
 router.post('/', validateBody(createPostSchema), createPostHandler);
