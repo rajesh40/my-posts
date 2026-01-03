@@ -5,6 +5,9 @@ export const createPostSchema = zod.object({
     content: zod.string().trim().min(1, 'Content is required'),
 });
 
+export const postIdParamSchema = zod.object({
+    id: zod.coerce.number().int().positive(),
+});
 
 
 

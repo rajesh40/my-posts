@@ -19,3 +19,20 @@ export const validateBody = (schema: ZodType): RequestHandler => {
         return next();
     };
 };
+
+export const validateParams = (schema: ZodType): RequestHandler => {
+    return (req, _res, next) => {
+        const result = schema.safeParse(req.params);
+        if (!result.success) {
+            const message = result.error.issues
+                .map((issue) => {
+                    const path = issue.path.join('.');
+                    return path ? `${path}: ${issue.message}` : issue.message;
+                })
+                .join(', ');
+            return next(new AppError(message || 'Invalid request params', 400));
+        }
+
+        return next();
+    };
+};
