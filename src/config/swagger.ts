@@ -14,5 +14,5 @@ export const swaggerSpec = swaggerJsdoc({
       }
     ]
   },
-  apis: ['src/routes/*.ts'] // 👈 important
+  apis: ['src/routes/*.ts','src/docs/*.ts'] // 👈 important
 });
